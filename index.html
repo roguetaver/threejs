@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>CUBE</title>
+		<title> BIG YOSHI AND THE HOLY TRINITY </title>
 		<style>
 			body { margin: 0; }
 		</style>
@@ -18,45 +18,55 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
-            const textureYoshi = new THREE.TextureLoader().load('https://i.kym-cdn.com/entries/icons/facebook/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.jpg' );
-            const materialYoshi = new THREE.MeshBasicMaterial( { map: textureYoshi } );
+            const textureCrate = new THREE.TextureLoader().load('https://thumbs.dreamstime.com/b/wood-crate-generated-hires-texture-background-45525618.jpg' );
+            const materialCrate = new THREE.MeshBasicMaterial( { map: textureCrate } );
 
-            const textureMonke = new THREE.TextureLoader().load('https://i1.sndcdn.com/avatars-000704759671-vubbcx-t500x500.jpg' );
-            const materialMonke = new THREE.MeshBasicMaterial( { map: textureMonke } );
+            const textureEyeBall = new THREE.TextureLoader().load('https://staticdelivery.nexusmods.com/mods/264/images/thumbnails/97-0-1471472206.jpg' );
+            const materialEyeBall = new THREE.MeshBasicMaterial( { map: textureEyeBall } );
 
-            const textureChungus = new THREE.TextureLoader().load('https://pbs.twimg.com/profile_images/1189017442032467968/T4HUcDrr_400x400.jpg');
-            const materialChungus = new THREE.MeshBasicMaterial( { map: textureChungus } );
+            const textureIceCream = new THREE.TextureLoader().load('https://thumbs.dreamstime.com/b/seamless-pattern-texture-waffle-ice-cream-cone-cartoon-illustration-web-site-advertising-banner-seamless-pattern-116058546.jpg');
+            const materialIceCream = new THREE.MeshBasicMaterial( { map: textureIceCream } );
+
+            const textureBigYoshi = new THREE.TextureLoader().load('https://i.kym-cdn.com/entries/icons/facebook/000/025/999/Screen_Shot_2018-04-24_at_1.33.44_PM.jpg');
+            const materialBigYoshi = new THREE.MeshBasicMaterial( { map: textureBigYoshi } );
             
 			const cubegm = new THREE.BoxGeometry( 150, 150, 150 );
+            const smallcubegm = new THREE.BoxGeometry( 80, 80, 80 );
             const spheregm = new THREE.SphereGeometry( 100, 100, 100 );
-            const Cylindergm = new THREE.CylinderGeometry( 100, 100, 100 );
+            const Conegm = new THREE.ConeGeometry( 80, 250, 100 );
 
-			const cube = new THREE.Mesh( cubegm, materialYoshi );
-            const sphere = new THREE.Mesh( spheregm, materialMonke );
-            const Cylinder = new THREE.Mesh( Cylindergm, materialChungus );
+			const crate = new THREE.Mesh( cubegm, materialCrate );
+            const bigyoshi = new THREE.Mesh( smallcubegm, materialBigYoshi );
+            const sphere = new THREE.Mesh( spheregm, materialEyeBall );
+            const Cone = new THREE.Mesh( Conegm, materialIceCream );
 
-            cube.position.set( 200, 100, 0 );
+            crate.position.set( 200, 100, 0 );
+            bigyoshi.position.set( 0, 50, 0 );
             sphere.position.set( -200, 100, 0 );
-            Cylinder.position.set( 0, -100, 0)
+            Cone.position.set( 0, -200, 0)
 
             const group = new THREE.Group();
-            group.add( cube );
+            group.add( crate );
+            group.add( bigyoshi );
             group.add( sphere );
-            group.add( Cylinder );
-            
+            group.add( Cone );
+
 			scene.add( group );
 
 			const animate = function () {
 				requestAnimationFrame( animate );
 
-				cube.rotation.x += 0.01;
-                cube.rotation.y += 0.01;
+				crate.rotation.x += 0.01;
+                crate.rotation.y += 0.01;
 
-                sphere.rotation.x += 0.01;
-                sphere.rotation.y += 0.01;
+                bigyoshi.rotation.x -= 0.05;
+                bigyoshi.rotation.y -= 0.05;
 
-                Cylinder.rotation.x += 0.01;
-                Cylinder.rotation.y += 0.01;
+                sphere.rotation.x -= 0.02;
+                sphere.rotation.y -= 0.02;
+
+                Cone.rotation.x += 0.005;
+                Cone.rotation.y += 0.005;
 
 				renderer.render( scene, camera );
 			};
